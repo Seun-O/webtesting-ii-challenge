@@ -1,5 +1,6 @@
 import React from "react";
 import Display from "../Display/Display";
+import Button from "./Button";
 
 class Dashboard extends React.Component {
   state = { strike: 0, ball: 0, foul: 0 };
@@ -55,18 +56,10 @@ class Dashboard extends React.Component {
           foul={this.state.foul}
         />
         <div className="buttons">
-          <button onClick={this.handleClicks} name="strike">
-            Strike
-          </button>
-          <button onClick={this.handleClicks} name="ball">
-            Ball
-          </button>
-          <button onClick={this.handleClicks} name="foul">
-            Foul
-          </button>
-          <button onClick={this.handleClicks} name="hit">
-            Hit
-          </button>
+          <Button onClick={this.handleClicks} name={"strike"} />
+          <Button onClick={this.handleClicks} name={"ball"} />
+          <Button onClick={this.handleClicks} name={"foul"} />
+          <Button onClick={this.handleClicks} name={"hit"} />
         </div>
       </div>
     );
