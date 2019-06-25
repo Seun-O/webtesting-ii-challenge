@@ -1,33 +1,37 @@
 import React from "react";
-import { render, cleanup } from "@testing-library/react";
+import { render, cleanup, fireEvent } from "@testing-library/react";
 import "jest-dom/extend-expect";
 
 import Display from "./Display";
 
+afterEach(() => cleanup());
+
 it("renders without crashing ", () => {
   render(<Display />);
-  afterEach(cleanup);
 });
 
-it("should display count of balls", () => {
-  const simulatedDom = render(<Display />);
-  const balls = simulatedDom.getByText(/balls/i);
-  const ballsCount = simulatedDom.getAllByText(
-    /[0-9]|[1-8][0-9]|9[0-9]|[1-8][0-9]{2}|9[0-8][0-9]|99[0-9]|1000/
-  );
+// Test the document to see if balls appears on the page
+// Test Type getByText implicit deny Testing: regex /balls/i  -i case indifference
+it("should display balls", () => {
+  const { getByText } = render(<Display />);
+  const balls = getByText(/balls/i);
+  // No Assertion required because of implicit deny
   expect(balls).toBeInTheDocument();
-  expect(ballsCount).toBeInTheDocument();
-  afterEach(cleanup);
 });
 
-it("should display count of strikes", () => {
-  const simulatedDom = render(<Display />);
-  const strikes = simulatedDom.queryByText(/strikes/i);
-  const strikesCount = simulatedDom.queryAllByText(
-    /[0-9]|[1-8][0-9]|9[0-9]|[1-8][0-9]{2}|9[0-8][0-9]|99[0-9]|1000/
-  );
-
+// Test the document to see if strikes appears on the page
+// Test Type getByText implicit deny Testing: regex /strikes/i  -i case indifference
+it("should display strikes", () => {
+  const { getByText } = render(<Display />);
+  const strikes = getByText(/strikes/i);
+  // No Assertion required because of implicit deny
   expect(strikes).toBeInTheDocument();
-  expect(strikesCount).toBeInTheDocument();
-  afterEach(cleanup);
+});
+
+// test the document to see if a range of numbers renders on the page
+// Test Type getAllByText implicit deny Testing: regex /[0 - 3]/
+it("should display a list of numbers", () => {
+  const { getAllByText } = render(<Display ball={0} strike={2} foul={3} />);
+  const numbers = getAllByText(/[0-3]/);
+  // No Assertion required because of implicit deny
 });

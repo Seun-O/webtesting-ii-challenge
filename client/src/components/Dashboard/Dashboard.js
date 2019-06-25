@@ -4,6 +4,18 @@ import Display from "../Display/Display";
 class Dashboard extends React.Component {
   state = { strike: 0, ball: 0, foul: 0 };
 
+  /**
+   * Event Handler that has all the count rules in place
+   * Uses a switch statement based on the name of the button that is clicked
+   *
+   * Count Rules
+   * balls and strikes reset to 0 when a player reaches 3 strikes or 4 balls.
+   * balls and strikes reset to 0 when a `hit` is recorded.
+   *  `foul` increases strikes up to 2. With no strikes, a foul makes it 1 strike.
+   * With 1 strike, a foul makes it 2 strikes. With two strikes a foul has no effect, count stays at 2 strikes.
+   *
+   * */
+
   handleClicks = e => {
     switch (e.target.name) {
       case "strike":
@@ -21,10 +33,13 @@ class Dashboard extends React.Component {
         }
         break;
       case "foul":
+        if (this.state.strike < 2) {
+          this.setState({ strike: this.state.strike + 1 });
+        }
         this.setState({ foul: this.state.foul + 1 });
         break;
       case "hit":
-        this.setState({ strike: 0, ball: 0 });
+        this.setState({ strike: 0, ball: 0, foul: 0 });
         break;
       default:
         return;

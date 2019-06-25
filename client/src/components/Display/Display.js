@@ -1,10 +1,14 @@
 import React from "react";
+/**
+ * Props are updated from the Dashboard Component when each respective button is clicked
+ * count rules are located in the dashboard file.
+ */
 function Display(props) {
   return (
     <div>
-      <h1>Balls: {props.ball}</h1>
-      <h1>Strikes: {props.strike}</h1>
-      <h1>Fouls: {props.foul}</h1>
+      <h2>Balls: {props.ball}</h2>
+      <h2>Strikes: {props.strike}</h2>
+      <h2>Fouls: {props.foul}</h2>
     </div>
   );
 }

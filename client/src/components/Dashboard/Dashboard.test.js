@@ -4,7 +4,7 @@ import "jest-dom/extend-expect";
 
 import Dashboard from "./Dashboard";
 
-afterEach(cleanup);
+// afterEach(cleanup);
 
 it("renders without crashing ", () => {
   render(<Dashboard />);
